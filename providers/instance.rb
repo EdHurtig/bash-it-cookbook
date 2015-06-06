@@ -6,22 +6,24 @@ action :install do
   end
 
   home = new_resource.home ||= "/home/#{new_resource.name}"
+  bash_it = "#{home}/.bash_it"
 
-  git "#{home}/.bash_it" do
+  g = git bash_it do
     repository node['bash-it']['repository']
     revision node['bash-it']['revision']
     action :checkout
   end
+  updated = g.updated_by_last_action?
 
   ruby_block 'activate_deactivate_bash_it_modules' do
     block do
-      update_symlinks new_resource.plugins, "#{home}/.bash_it/plugins", 'plugin'
-      update_symlinks new_resource.aliases, "#{home}/.bash_it/aliases", 'aliases'
-      update_symlinks new_resource.completions, "#{home}/.bash_it/completion", 'completion'
+      updated ||= enable_disable(new_resource.plugins, "#{bash_it}/plugins", 'plugin')
+      updated ||= enable_disable(new_resource.aliases, "#{bash_it}/aliases", 'aliases')
+      updated ||= enable_disable(new_resource.completions, "#{bash_it}/completion", 'completion')
     end
   end
 
-  template "#{home}/.bashrc" do
+  t = template "#{home}/.bashrc" do
     source 'bashrc.sh.erb'
     owner new_resource.name
     group new_resource.name
@@ -34,33 +36,40 @@ action :install do
       scm_check: new_resource.scm_check
     )
   end
+  updated ||= t.updated_by_last_action?
+  new_resource.updated_by_last_action(updated)
 end
 
 action :remove do
   user = new_resource.name
 
-  directory "/home/#{user}/.bash_it" do
+  d = directory "/home/#{user}/.bash_it" do
     recursive true
-    action :remove
+    action :delete
     only_if Dir.exist?("/home/#{user}")
   end
+
+  new_resource.updated_by_last_action(d.updated_by_last_action?)
 end
 
-def update_symlinks(new_names, base_dir, type)
+# rubocop:disable Metrics/AbcSize
+def enable_disable(new_names, base_dir, type)
   directory "#{base_dir}/enabled/"
 
-  existing = Dir.glob("#{base_dir}/enabled/*.bash").map { |f| f.split('.')[0] }
-  removed = existing - new_names
+  removed = Dir.glob("#{base_dir}/enabled/*.bash").map { |f| f.split('.')[0] } - new_names
 
-  removed.each do |script|
+  removed.map! do |script|
     link "#{base_dir}/enabled/#{script}.#{type}.bash" do
       action :delete
-    end
+    end.updated_by_last_action?
   end
 
-  new_names.each do |script|
+  new_names.map! do |script|
     link "#{base_dir}/enabled/#{script}.#{type}.bash" do
       to "#{base_dir}/available/#{script}.#{type}.bash"
-    end
+    end.updated_by_last_action?
   end
+
+  removed.concat(new_names).any?
 end
+# rubocop:enable Metrics/AbcSize

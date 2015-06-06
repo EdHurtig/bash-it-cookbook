@@ -53,9 +53,9 @@ bash_it_instance 'edhurtig' do
     theme 'dulice' # Any Bash it theme
     git 'git@git.hurtigtechnologies.com' # Custom Git Server
     scm_check true # Whether to check for SCM continuously
-    plugins [...] # An array of plugins that should be active
-    aliases [...] # An array of aliases that should be active
-    completions [...] # An array of completions that should be active
+    plugins %w( base history ruby  ) # An array of plugins that should be active
+    aliases %w( git rails tmux ) # An array of aliases that should be active
+    completions %w( git ssh tmux test-kitchen ) # An array of completions that should be active
 end
 
 ```

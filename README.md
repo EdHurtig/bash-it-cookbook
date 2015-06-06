@@ -2,6 +2,8 @@
 
 Installs [Bash it](https://github.com/Bash-it/bash-it) which is an easy way to make your bash shell awesome
 
+![Bash it Booby Theme (Dark)](https://camo.githubusercontent.com/a8093b6728855acc22967af0d65510ed60318c96/68747470733a2f2f7261772e6769746875622e636f6d2f77696b692f726576616e732f626173682d69742f696d616765732f73637265656e73686f74732f626f6262792d626c61636b2e6a7067)
+
 # Requirements
 
 * `apt` cookbook

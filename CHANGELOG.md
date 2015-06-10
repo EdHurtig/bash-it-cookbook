@@ -4,30 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Changed
-- Improve argument against commit logs.
 
 ## [0.0.2] - YYY-MM-DD
 ### Added
-- Explanation of the recommended reverse chronological release ordering.
+- templates_cookbook attribute to bash_it_instance LWRP for wrapper cookbooks
 
 ### Changed
-- Refer to a "change log" instead of a "CHANGELOG" throughout the site
-to differentiate between the file and the purpose of the file — the
-logging of changes.
+- Fixed [Issue #1](https://github.com/edhurtig/bash-it-cookbook/issues/1) where a stateful bug caused convergence failures
 
 ### Removed
-- Remove empty sections from CHANGELOG, they occupy too much space and
-create too much noise in the file. People will have to assume that the
-missing sections were intentionally left out because they contained no
-notable changes.
 
-## 0.0.1 - YYYY-MM-DD
+## 0.0.1 - 2015-06-06
 ### Added
-- This CHANGELOG file to hopefully serve as an evolving example of a standardized open source project CHANGELOG.
-- CNAME file to enable GitHub Pages custom domain
-- README now contains answers to common questions about CHANGELOGs
-- Good examples and basic guidelines, including proper date formatting.
-- Counter-examples: "What makes unicorns cry?"
+- Initial Release w/ bash_it_instance LWRP
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.8...HEAD
-[0.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.1...v0.0.2
+[unreleased]: https://github.com/edhurtig/bash-it-cookbook/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/edhurtig/bash-it-cookbook/compare/v0.0.1...v0.0.2

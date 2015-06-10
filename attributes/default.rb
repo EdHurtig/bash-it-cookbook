@@ -3,6 +3,7 @@ default['bash-it']['revision'] = 'master'
 
 default['bash-it']['users'] = []
 
+default['bash-it']['instance_default']['templates_cookbook'] = 'bash-it'
 default['bash-it']['instance_default']['git'] = 'git@github.com'
 default['bash-it']['instance_default']['theme'] = 'bobby'
 default['bash-it']['instance_default']['irc_client'] = 'irssi'

@@ -24,6 +24,7 @@ action :install do
   end
 
   t = template "#{home}/.bashrc" do
+    cookbook new_resource.templates_cookbook
     source 'bashrc.sh.erb'
     owner new_resource.name
     group new_resource.name

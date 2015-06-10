@@ -58,19 +58,18 @@ def enable_disable(new_names, base_dir, type)
   directory "#{base_dir}/enabled/"
 
   removed = Dir.glob("#{base_dir}/enabled/*.bash").map { |f| f.split('.')[0] } - new_names
-
   removed.map! do |script|
     link "#{base_dir}/enabled/#{script}.#{type}.bash" do
       action :delete
     end.updated_by_last_action?
   end
 
-  new_names.map! do |script|
+  added = new_names.map do |script|
     link "#{base_dir}/enabled/#{script}.#{type}.bash" do
       to "#{base_dir}/available/#{script}.#{type}.bash"
     end.updated_by_last_action?
   end
 
-  removed.concat(new_names).any?
+  removed.concat(added).any?
 end
 # rubocop:enable Metrics/AbcSize

@@ -74,7 +74,6 @@ include_recipe 'bash-it::default'
 
 # TODO
 
-* Fix node attributes are read only bug issue #1
 * Add recipe to install bash it globally
 
 ## Contributing

@@ -17,3 +17,8 @@ suites:
       bash-it:
         users:
           - root
+  - name: global
+    run_list:
+      - recipe[bash-it::default]
+      - recipe[bash-it::global]
+    attributes:

@@ -32,7 +32,7 @@ action :install do
     source 'bashrc.sh.erb'
     owner new_resource.name unless new_resource.name == 'global'
     group new_resource.name unless new_resource.name == 'global'
-    mode '0550'
+    mode new_resource.name == 'global' ? 0555 : 0550
     variables(
       git: new_resource.git,
       theme: new_resource.theme,

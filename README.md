@@ -10,13 +10,36 @@ Installs [Bash it](https://github.com/Bash-it/bash-it) which is an easy way to m
 * `yum` cookbook
 * `git` cookbook
 
+# Attributes
+
+The `node['bash-it']['instance_default']` attributes are parsed out as defaults for the `bash_it_instance` resource
+
+The `node['bash-it']['repository']` and `node['bash-it']['revision']` attributes are used to specify the git repo and revision to clone down bash-it from.  It defaults to the [official bash-it repo](https://github.com/Bash-it/bash-it)
+
+The `node['bash-it']['users']` attribute is an array of usernames that should have bash-it installed accoring to the instance defaults.  FYI: I will probably deprecate this in the future
+
+
+See [attributes/default.rb](https://github.com/EdHurtig/bash-it-cookbook/blob/master/attributes/default.rb) for more details
+
 # Recipes
 
 ## default
 
-Installs Git and will automatically configure Bash it for users specified in `node['bash-it']['users']`
+* Apt & Yum Recipes
+* Install Git
+* Configure Bash it for users specified in `node['bash-it']['users']`
 
 This recipe is not nessesary so long as git is installed before using the `bash_it_instance` LWRP
+
+## Global
+
+This recipe will install a global version of bash-it for all users on the system.  I don't like this approach personally because it is not flexible and a shell should be configurable to a user's own preferances when possible
+
+In any event, to use this recipe you just need to include `bash-it::global`
+
+Note: You might need the `bash-it::default` recipe to install dependencies as well
+
+This recipe will use the `node['bash-it']['instance_default']` keys to determine plugins, aliases, ect.
 
 # Resources
 
@@ -24,7 +47,7 @@ This recipe is not nessesary so long as git is installed before using the `bash_
 
 To install Bash it for a user you simply put `bash_it_instance <username>` in your recipe.  This is best placed in your users cookbook if you have one.
 
-Default attributes for the `bash_it_instance` are stored as node attributes in the `node['bash-it']['instance_defaults']` hash so that you can easily override the defaults
+Default attributes for the `bash_it_instance` are stored as node attributes in the `node['bash-it']['instance_default']` hash so that you can easily override the defaults
 
 ### Examples
 
@@ -68,13 +91,18 @@ Include this recipe in a wrapper cookbook:
 depends 'bash-it', '~> 1.0'
 ```
 
+
 ```
-include_recipe 'bash-it::default'
+# Install bash it globally using the node['bash-it']['instance_default'] attributes
+include_recipe 'bash-it::global'
+
+# Install an instance of bash-it for a specific user using the defaults
+bash_it_instance 'edhurtig'
 ```
 
 # TODO
 
-* Add recipe to install bash it globally
+See the [Issues](https://github.com/EdHurtig/bash-it-cookbook/issues)
 
 ## Contributing
 

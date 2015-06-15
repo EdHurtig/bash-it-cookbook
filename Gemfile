@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf', '~> 3.2'
+gem 'coveralls', require: false
 
 group :unit do
   gem 'foodcritic', '~> 4.0'

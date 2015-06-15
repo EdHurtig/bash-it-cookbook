@@ -21,9 +21,9 @@ action :install do
 
   ruby_block 'activate_deactivate_bash_it_modules' do
     block do
-      updated ||= enable_disable(new_resource.plugins, "#{install_dir}/plugins", 'plugin')
-      updated ||= enable_disable(new_resource.aliases, "#{install_dir}/aliases", 'aliases')
-      updated ||= enable_disable(new_resource.completions, "#{install_dir}/completion", 'completion')
+      updated ||= enable(new_resource.plugins, "#{install_dir}/plugins", 'plugin')
+      updated ||= enable(new_resource.aliases, "#{install_dir}/aliases", 'aliases')
+      updated ||= enable(new_resource.completions, "#{install_dir}/completion", 'completion')
     end
   end
 
@@ -60,7 +60,7 @@ action :remove do
 end
 
 # rubocop:disable Metrics/AbcSize
-def enable_disable(new_names, base_dir, type)
+def enable(new_names, base_dir, type)
   directory "#{base_dir}/enabled/"
 
   removed = Dir.glob("#{base_dir}/enabled/*.bash").map { |f| f.split('.')[0] } - new_names

@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 ### Changed
 
+## [0.1.1] - 2015-06-15
+### Changed
+- Fixed Issue #3 where items that were previously enabled were not being disabled
 
 ## [0.1.0] - 2015-06-15
 ### Added

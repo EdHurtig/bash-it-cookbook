@@ -64,7 +64,7 @@ def enable(new_names, base_dir, type)
   directory "#{base_dir}/enabled/"
 
   removed = Dir.glob("#{base_dir}/enabled/*.bash").map do |f|
-    File.basename f, ".#{type}.bash"
+    ::File.basename f, ".#{type}.bash"
   end - new_names
 
   removed.map! do |script|

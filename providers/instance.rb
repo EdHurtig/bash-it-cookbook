@@ -53,7 +53,6 @@ action :remove do
   d = directory install_dir do
     recursive true
     action :delete
-    only_if Dir.exist?("/home/#{user}")
   end
 
   new_resource.updated_by_last_action(d.updated_by_last_action?)

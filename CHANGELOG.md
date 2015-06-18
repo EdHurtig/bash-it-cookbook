@@ -5,6 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 ### Changed
 
+## [0.1.3] - 2015-06-17
+### Changed
+- The bashrc template to check if there are any files matching ~/.bashrc_* before iterating
+
+### Removed
+- Docker from the default list of plugins and aliasses
+
+## [0.1.2] - 2015-06-15
+### Removed
+- An unnessesary only_if guard
+
 ## [0.1.1] - 2015-06-15
 ### Changed
 - Fixed Issue #3 where items that were previously enabled were not being disabled

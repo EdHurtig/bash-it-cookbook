@@ -35,6 +35,10 @@ if [ -f '.exports' ]; then
   source .exports
 fi
 
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
+
 # Load other bashrc files (alphabetically)
 if ls /path/to/your/files* 1> /dev/null 2>&1; then
   for f in ~/.bashrc_*;
@@ -46,5 +50,16 @@ fi
 # Load Bash It if it exists
 if [ -f "$BASH_IT/bash_it.sh" ]; then
   source $BASH_IT/bash_it.sh
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    source /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+  fi
 fi
 

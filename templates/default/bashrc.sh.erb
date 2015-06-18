@@ -32,16 +32,19 @@ export SCM_CHECK=<%= @scm_check %>
 
 # include an exports file if it exists
 if [ -f '.exports' ]; then
-  . .exports
+  source .exports
 fi
 
 # Load other bashrc files (alphabetically)
-for f in ~/.bashrc_*;
-do
-  source "$f";
-done
+if ls /path/to/your/files* 1> /dev/null 2>&1; then
+  for f in ~/.bashrc_*;
+  do
+    source "$f";
+  done
+fi
 
 # Load Bash It if it exists
 if [ -f "$BASH_IT/bash_it.sh" ]; then
- . $BASH_IT/bash_it.sh
+  source $BASH_IT/bash_it.sh
 fi
+

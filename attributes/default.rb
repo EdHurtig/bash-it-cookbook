@@ -14,7 +14,6 @@ default['bash-it']['instance_default']['plugins'] = %w(
   base
   browser
   dirs
-  docker
   extract
   gh
   gif
@@ -42,7 +41,6 @@ default['bash-it']['instance_default']['aliases'] = %w(
   ansible
   bundler
   clipboard
-  docker
   emacs
   fuck
   general

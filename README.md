@@ -23,7 +23,7 @@ See [attributes/default.rb](https://github.com/EdHurtig/bash-it-cookbook/blob/ma
 
 # Recipes
 
-## default
+## `bash-it::default`
 
 * Apt & Yum Recipes
 * Install Git
@@ -31,7 +31,7 @@ See [attributes/default.rb](https://github.com/EdHurtig/bash-it-cookbook/blob/ma
 
 This recipe is not nessesary so long as git is installed before using the `bash_it_instance` LWRP
 
-## Global
+## `bash-it::global`
 
 This recipe will install a global version of bash-it for all users on the system.  I don't like this approach personally because it is not flexible and a shell should be configurable to a user's own preferances when possible
 

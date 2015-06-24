@@ -1,4 +1,4 @@
-# bash-it [![Build Status](https://travis-ci.org/EdHurtig/bash-it-cookbook.svg)](https://travis-ci.org/EdHurtig/bash-it-cookbook)
+# bash-it [![Build Status](https://travis-ci.org/EdHurtig/bash-it-cookbook.svg)](https://travis-ci.org/EdHurtig/bash-it-cookbook) [![Cookbook Version](https://img.shields.io/cookbook/v/bash-it.svg)](https://supermarket.chef.io/cookbooks/bash-it)
 
 Installs [Bash it](https://github.com/Bash-it/bash-it) which is an easy way to make your bash shell awesome
 

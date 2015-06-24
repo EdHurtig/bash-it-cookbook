@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 ### Changed
 
+## [0.1.4] - 2015-06-23
+### Changed
+- Fixed a potential security problem in the bashrc template where the .exports file could exist outside the user's home directory and an unexpected .exports file could be sourced upon reload
+
 ## [0.1.3] - 2015-06-17
 ### Changed
 - The bashrc template to check if there are any files matching ~/.bashrc_* before iterating

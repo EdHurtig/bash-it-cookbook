@@ -31,8 +31,8 @@ export SCM_CHECK=<%= @scm_check %>
 #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
 
 # include an exports file if it exists
-if [ -f '.exports' ]; then
-  source .exports
+if [ -f ~/.exports ]; then
+  source ~/.exports
 fi
 
 if [ -f ~/.bash_aliases ]; then

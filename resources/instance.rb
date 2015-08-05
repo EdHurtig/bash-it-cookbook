@@ -3,6 +3,8 @@ actions :install, :remove
 default_action :install
 
 attribute :name,               kind_of: String, name_attribute: true
+attribute :user,               kind_of: String
+attribute :group,              kind_of: String
 attribute :templates_cookbook, kind_of: String
 attribute :home,               kind_of: String
 attribute :install_dir,        kind_of: String

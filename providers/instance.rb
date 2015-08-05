@@ -4,11 +4,16 @@ action :install do
       new_resource.instance_variable_set("@#{attr}", val)
     end
   end
+
+  unless new_resource.user
+    new_resource.instance_variable_set("@user", new_resource.name)
+  end
+
   home = new_resource.home
   install_dir = new_resource.install_dir
   bashrc = new_resource.bashrc
 
-  home ||= "/home/#{new_resource.name}"
+  home ||= "/home/#{new_resource.user}"
   install_dir ||= "#{home}/.bash_it"
   bashrc ||= "#{home}/.bashrc"
 
@@ -16,6 +21,10 @@ action :install do
     repository node['bash-it']['repository']
     revision node['bash-it']['revision']
     action :checkout
+    unless new_resource.name == 'global'
+      user new_resource.user
+      group new_resource.group
+    end
   end
   updated = g.updated_by_last_action?
 
@@ -30,8 +39,10 @@ action :install do
   t = template bashrc do
     cookbook new_resource.templates_cookbook
     source 'bashrc.sh.erb'
-    owner new_resource.name unless new_resource.name == 'global'
-    group new_resource.name unless new_resource.name == 'global'
+    unless new_resource.name == 'global'
+      owner new_resource.user
+      group new_resource.group
+    end
     mode new_resource.name == 'global' ? 0555 : 0550
     variables(
       git: new_resource.git,
@@ -47,7 +58,7 @@ action :install do
 end
 
 action :remove do
-  home = new_resource.home ||= "/home/#{new_resource.name}"
+  home = new_resource.home ||= "/home/#{new_resource.user}"
   install_dir = "#{home}/.bash_it" if install_dir.empty?
 
   d = directory install_dir do

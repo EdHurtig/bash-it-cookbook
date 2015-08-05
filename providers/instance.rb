@@ -6,7 +6,7 @@ action :install do
   end
 
   unless new_resource.user
-    new_resource.instance_variable_set("@user", new_resource.name)
+    new_resource.instance_variable_set('@user', new_resource.name)
   end
 
   home = new_resource.home

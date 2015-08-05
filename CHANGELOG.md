@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 ### Changed
 
+## [0.1.5] - 2015-08-04
+### Changed
+- Added a user and group attribute to `bash_it_instance`. User attribute defaults
+to name attribute if not specified.  Group will default to root.  Used to set the owner and group of files created
+
+
 ## [0.1.4] - 2015-06-23
 ### Changed
 - Fixed a potential security problem in the bashrc template where the .exports file could exist outside the user's home directory and an unexpected .exports file could be sourced upon reload

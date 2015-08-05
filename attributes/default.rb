@@ -9,6 +9,7 @@ default['bash-it']['instance_default']['theme'] = 'bobby'
 default['bash-it']['instance_default']['irc_client'] = 'irssi'
 default['bash-it']['instance_default']['todo'] = 't'
 default['bash-it']['instance_default']['scm_check'] = true
+default['bash-it']['instance_default']['group'] = 'root'
 
 default['bash-it']['instance_default']['plugins'] = %w(
   base

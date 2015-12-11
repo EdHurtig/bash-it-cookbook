@@ -58,7 +58,12 @@ action :install do
 end
 
 action :remove do
-  home = new_resource.home ||= "/home/#{new_resource.user}"
+
+  unless new_resource.user
+    new_resource.instance_variable_set('@user', new_resource.name)
+  end
+
+  home = new_resource.home || "/home/#{new_resource.user}"
   install_dir = "#{home}/.bash_it" if install_dir.empty?
 
   d = directory install_dir do

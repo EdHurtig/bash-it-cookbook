@@ -9,13 +9,9 @@ action :install do
     new_resource.instance_variable_set('@user', new_resource.name)
   end
 
-  home = new_resource.home
-  install_dir = new_resource.install_dir
-  bashrc = new_resource.bashrc
-
-  home ||= "/home/#{new_resource.user}"
-  install_dir ||= "#{home}/.bash_it"
-  bashrc ||= "#{home}/.bashrc"
+  home = new_resource.home || "/home/#{new_resource.user}"
+  install_dir = new_resource.install_dir || "#{home}/.bash_it"
+  bashrc = new_resource.bashrc || "#{home}/.bashrc"
 
   g = git install_dir do
     repository node['bash-it']['repository']
@@ -64,7 +60,7 @@ action :remove do
   end
 
   home = new_resource.home || "/home/#{new_resource.user}"
-  install_dir = "#{home}/.bash_it" if install_dir.empty?
+  install_dir = new_resource.install_dir || "#{home}/.bash_it"
 
   d = directory install_dir do
     recursive true

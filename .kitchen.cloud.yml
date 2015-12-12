@@ -1,0 +1,42 @@
+---
+driver_plugin: vsphere
+driver_config:
+  driver_options:
+    host: '<%= ENV['VSPHERE_HOST'] %>'
+    user: '<%= ENV['VSPHERE_USER'] %>'
+    password: '<%= ENV['VSPHERE_PASS'] %>'
+    insecure: <%= ENV['VSPHERE_INSECURE'] %>
+  machine_options:
+    bootstrap_options:
+      use_linked_clone: true
+      datacenter: '<%= ENV['VSPHERE_DATACENTER'] %>'
+      template_name: '<%= ENV['VSPHERE_TEMPLATE'] %>'
+      vm_folder: '<%= ENV['VSPHERE_BASE_PATH'] %>'
+      resource_pool: '<%= ENV['VSPHERE_RESOURCE_POOL'] %>'
+      ssh:
+        user: <%= ENV['VSPHERE_SSH_USER'] %>
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+  - name: centos-7.1
+    driver_config:
+      machine_options:
+        bootstrap_options:
+          template_name: 'centos7-ci'
+
+suites:
+  - name: default
+    run_list:
+      - recipe[bash-it::default]
+    attributes:
+      bash-it:
+        users:
+          - root
+  - name: global
+    run_list:
+      - recipe[bash-it::default]
+      - recipe[bash-it::global]
+    attributes:

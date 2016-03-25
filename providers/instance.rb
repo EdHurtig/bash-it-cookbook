@@ -54,7 +54,6 @@ action :install do
 end
 
 action :remove do
-
   unless new_resource.user
     new_resource.instance_variable_set('@user', new_resource.name)
   end

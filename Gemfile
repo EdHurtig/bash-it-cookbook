@@ -5,7 +5,7 @@ gem 'coveralls', require: false
 
 group :unit do
   gem 'foodcritic', '~> 4.0'
-  gem 'rubocop',    '~> 0.29'
+  gem 'rubocop',    '~> 0.49'
   gem 'chefspec',   '~> 4.2'
 end
 
